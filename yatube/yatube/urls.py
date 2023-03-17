@@ -13,6 +13,8 @@ urlpatterns = [
 ]
 
 handler404 = 'core.views.page_not_found'  # обработчик ошибки 404
+handler403 = 'core.views.csrf_failure'  # обработчик ошибки 403
+
 
 # Разрешение брать картинки пользователя в режиме отладки
 if settings.DEBUG:
