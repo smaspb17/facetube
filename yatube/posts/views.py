@@ -42,7 +42,7 @@ def profile(request, username):
     # Здесь код запроса к модели и создание словаря контекста
     user = request.user
     author = get_object_or_404(User, username=username)
-    posts = author.posts.select_related('group', 'author')
+    posts = author.posts.all()
     page_obj = paginator(request, posts)
     post_count = author.posts.select_related('group', 'author').count()
     follower_count = Follow.objects.filter(user=user).count()
