@@ -45,7 +45,7 @@ def profile(request, username):
     posts = author.posts.all()
     page_obj = paginator(request, posts)
     post_count = author.posts.select_related('group', 'author').count()
-    follower_count = Follow.objects.filter(user=user).count()
+    follower_count = Follow.objects.filter(user=author).count()
     following = (
         user.is_authenticated
         and Follow.objects.filter(user=user, author=author)
