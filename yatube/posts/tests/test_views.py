@@ -35,6 +35,7 @@ class PostsViewsTests(TestCase):
         self.user2 = User.objects.create_user(username='notfollower')
         self.authorized_client2 = Client()
         self.authorized_client2.force_login(self.user2)
+        cache.clear()
 
     def posts_check_all_fields(self, post):
         """Корректность полей поста."""

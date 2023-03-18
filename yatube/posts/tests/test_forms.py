@@ -6,6 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
+from django.core.cache import cache
 
 from posts.forms import PostForm
 from posts.models import Group, Post, Comment
@@ -33,6 +34,7 @@ class PostsFormsTest(TestCase):
         self.guest_client = Client()
         self.authorized_client = Client()
         self.authorized_client.force_login(self.author)
+        cache.clear()
 
     def test_posts_forms_create_post(self):
         """Cоздание формы поста."""

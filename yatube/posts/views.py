@@ -1,4 +1,3 @@
-# from django.views.decorators.cache import cache_page
 
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
@@ -19,9 +18,8 @@ def paginator(request, posts):
     return page_obj
 
 
-# @cache_page(60 * 20, key_prefix='index_page')
 def index(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.all().select_related('author')
     page_obj = paginator(request, post_list)
     context = {
         'page_obj': page_obj,
@@ -47,6 +45,7 @@ def profile(request, username):
     posts = author.posts.select_related('group', 'author')
     page_obj = paginator(request, posts)
     post_count = author.posts.select_related('group', 'author').count()
+    follower_count = Follow.objects.filter(user=user).count()
     following = (
         user.is_authenticated
         and Follow.objects.filter(user=user, author=author)
@@ -57,6 +56,7 @@ def profile(request, username):
         'username': author,
         'posts': posts,
         'following': following,
+        'follower_count': follower_count,
     }
     return render(request, 'posts/profile.html', context)
 
@@ -166,30 +166,5 @@ def profile_unfollow(request, username):
         user=user,
         author=author
     )
-    if follow.exists():
-        follow.delete()
+    follow.delete()
     return redirect('posts:profile', username)
-
-
-'''
-@login_required  # декоратор авторизации
-def post_edit(request, post_id):
-    template = 'posts/create_post.html'
-    post = get_object_or_404(Post, pk=post_id)
-    if post.author != request.user:
-        return redirect('posts:post_detail', post_id)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('posts:post_detail', post_id)
-        return render(
-            request,
-            'posts/create_post.html',
-            {'form': form, 'is_edit': True}
-        )
-    form = PostForm(instance=post)
-    return render(request, template,
-                  {'form': form, 'is_edit': True,
-                   'post': post})
-'''
