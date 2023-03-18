@@ -1,14 +1,19 @@
+import shutil
+import tempfile
+
+from django.conf import settings
 from django import forms
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
+from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 from django.core.cache import cache
-
 from posts.models import Group, Post, Follow
 
+TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 User = get_user_model()
 
 
+@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostsViewsTests(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -26,6 +31,11 @@ class PostsViewsTests(TestCase):
             )
         }
 
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
+
     def setUp(self):
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
@@ -35,7 +45,6 @@ class PostsViewsTests(TestCase):
         self.user2 = User.objects.create_user(username='notfollower')
         self.authorized_client2 = Client()
         self.authorized_client2.force_login(self.user2)
-        cache.clear()
 
     def posts_check_all_fields(self, post):
         """Корректность полей поста."""
