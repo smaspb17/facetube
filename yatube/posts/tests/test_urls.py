@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from posts.models import Post, Group, User
+from django.core.cache import cache
 
 
 class PostURLTest(TestCase):
@@ -13,6 +14,24 @@ class PostURLTest(TestCase):
         cls.group = Group.objects.create(slug='slug')
         cls.post = Post.objects.create(author=cls.user)
         cls.template_404 = 'core/404.html'
+
+    def setUp(self):
+        self.templates_url_names = {
+            '/': 'posts/index.html',
+            '/group/slug/': 'posts/group_list.html',
+            '/profile/name/': 'posts/profile.html',
+            f'/posts/{self.post.id}/': 'posts/post_detail.html',
+            f'/posts/{self.post.id}/edit/': 'posts/create_post.html',
+            '/create/': 'posts/create_post.html',
+        }
+        cache.clear()
+
+    def test_urls(self):
+        """Соответствие шаблонов адресам"""
+        for address, template in self.templates_url_names.items():
+            with self.subTest(address=address):
+                response = self.authorized_client.get(address)
+                self.assertTemplateUsed(response, template)
 
     def test_home_url_exists_at_desired_location(self):
         """Главная страница доступна любому пользователю."""
@@ -36,21 +55,6 @@ class PostURLTest(TestCase):
             with self.subTest(url_adress=url_adress):
                 response = self.authorized_client.get(url_test_adress)
                 self.assertEqual(response.status_code, 200)
-
-    def test_urls(self):
-        """Соответствие шаблонов адресам"""
-        templates_url_names = {
-            '/': 'posts/index.html',
-            '/group/slug/': 'posts/group_list.html',
-            '/profile/name/': 'posts/profile.html',
-            f'/posts/{self.post.id}/': 'posts/post_detail.html',
-            f'/posts/{self.post.id}/edit/': 'posts/create_post.html',
-            '/create/': 'posts/create_post.html',
-        }
-        for address, template in templates_url_names.items():
-            with self.subTest(address=address):
-                response = self.authorized_client.get(address)
-                self.assertTemplateUsed(response, template)
 
     def test_unexisting_page(self):
         """Запрос к несуществующей странице вернет ошибку 404

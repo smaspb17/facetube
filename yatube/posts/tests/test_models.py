@@ -24,16 +24,16 @@ class PostModelTest(TestCase):
         """Корректный verbose_name у полей модели Post."""
         def test_verbose_name_values(field):
             return Post._meta.get_field(field).verbose_name
-        self.assertEqual(test_verbose_name_values('text'), 'Текст поста_v')
-        self.assertEqual(test_verbose_name_values('group'), 'Группа_v')
+        self.assertEqual(test_verbose_name_values('text'), 'Текст поста')
+        self.assertEqual(test_verbose_name_values('group'), 'Группа')
         self.assertEqual(test_verbose_name_values('author'),
-                         'Автор публикации_v')
+                         'Автор публикации')
 
     def test_help_text(self):
         """Корректный help_text у полей модели Post."""
         def test_help_text_values(field):
             return Post._meta.get_field(field).help_text
         self.assertEqual(test_help_text_values('text'),
-                         'Введите текст поста_h')
+                         'Введите текст поста')
         self.assertEqual(test_help_text_values('group'),
-                         'Группа, к которой будет относиться пост_h')
+                         'Группа, к которой будет относиться пост')

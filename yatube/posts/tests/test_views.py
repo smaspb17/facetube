@@ -45,6 +45,7 @@ class PostsViewsTests(TestCase):
         self.user2 = User.objects.create_user(username='notfollower')
         self.authorized_client2 = Client()
         self.authorized_client2.force_login(self.user2)
+        cache.clear()
 
     def posts_check_all_fields(self, post):
         """Корректность полей поста."""
@@ -220,6 +221,7 @@ class PostsPaginatorViewsTests(TestCase):
         cls.authorized_client.force_login(cls.user)
         for count in range(13):
             cls.post = Post.objects.create(author=cls.user)
+        cache.clear()
 
     def test_posts_if_first_page_has_ten_records(self):
         """Содержание на первой страницы 10 записей."""

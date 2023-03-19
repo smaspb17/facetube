@@ -15,26 +15,26 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField(
-        verbose_name='Текст поста_v',
-        help_text='Введите текст поста_h',
+        verbose_name='Текст поста',
+        help_text='Введите текст поста',
     )
     pub_date = models.DateTimeField(
-        'Дата публикации_bv',
+        'Дата публикации',
         auto_now_add=True,
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='posts',
-        verbose_name='Автор публикации_v')
+        verbose_name='Автор публикации')
     group = models.ForeignKey(
         'Group',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts',
-        verbose_name='Группа_v',
-        help_text='Группа, к которой будет относиться пост_h'
+        verbose_name='Группа',
+        help_text='Группа, к которой будет относиться пост'
     )
     image = models.ImageField(
         'Картинка',
