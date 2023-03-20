@@ -20,6 +20,11 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item"> 
+          <a class="nav-link {% if view_name == 'posts:profile' %}active{% endif %}" 
+            href="{% url 'posts:profile' user.username %}">Личный кабинет
+          </a>
+        </li>
+        <li class="nav-item"> 
           <a class="nav-link {% if view_name == 'posts:post_create' %}active{% endif %}" 
             href="{% url 'posts:post_create' %}">Новая запись
           </a>
@@ -34,8 +39,10 @@
             href="{% url 'users:logout' %}">Выйти
           </a>
         </li>
-        <li>
+        <li class="nav-item">
+          <a class="nav-link link-light">
           Пользователь: {{ user.username }}
+          </a>
         </li>
         {% else %}
         <li class="nav-item"> 

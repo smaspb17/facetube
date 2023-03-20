@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required  # встр. авториз
 from django.core.paginator import Paginator
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page
 from .models import Post, Group, Comment, Follow
 from . forms import PostForm, CommentForm
 
 
 SELECT_LIMIT = 10
-CACHE_TIME_IN_SEC = 20
+# CACHE_TIME_IN_SEC = 1
 
 
 def paginator(request, posts):
@@ -19,7 +19,7 @@ def paginator(request, posts):
     return page_obj
 
 
-@cache_page(CACHE_TIME_IN_SEC, key_prefix='index_page')
+# @cache_page(CACHE_TIME_IN_SEC, key_prefix='index_page')
 def index(request):
     post_list = Post.objects.all().select_related('author')
     page_obj = paginator(request, post_list)
@@ -59,6 +59,8 @@ def profile(request, username):
         'posts': posts,
         'following': following,
         'follower_count': follower_count,
+        'user': user,
+        'author': author,
     }
     return render(request, 'posts/profile.html', context)
 

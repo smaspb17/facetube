@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-{% load cache %}
+<!-- {% load cache %} --> 
 {% block title %}Последние обновления на сайте{% endblock %}
 {% block content %}
   <!-- класс py-5 создает отступы сверху и снизу блока -->
-  <div class="container py-5">
-  {% cache 20 index_page %}
+  <div class="container py-1">   
+  <h1>Добро пожаловать на главную страницу Yatube!</h1>
+  <h1>Создавайте посты с картинками :))</h1>    
   {% include 'posts/includes/switcher.html' %} 
   {% for post in page_obj %}  
     <ul>
@@ -13,19 +14,26 @@
         Автор: {{ post.author.get_full_name }}
       </li>
       <li>
+        Группа: {{ post.group.title }}
+      </li>
+      <li>
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
+      <li>
+        <a href="{% url 'posts:profile' post.author.username %}">Страничка автора поста</a>
+      </li>
+      {% if post.group %}   
+      <li>
+        <a href="{% url 'posts:group_list' post.group.slug %}">Все записи группы</a>
+      </li>
+      {% endif %}
     </ul>
     {% thumbnail post.image "660x139" crop="center" upscale=True as im %}
         <img class="card-img my-2" src="{{ im.url }}">
     {% endthumbnail %}  
     <p>{{ post.text }}</p>
-    {% if post.group %}   
-      <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-    {% endif %}
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
-  {% endcache %} 
     <!-- под последним постом нет линии -->
   {% include 'posts/includes/paginator.html' %}
   </div>  
