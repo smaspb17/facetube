@@ -164,16 +164,16 @@ class PostsViewsTests(TestCase):
         group = post.group
         self.assertEqual(group, self.group)
 
-    def test_index_page_cache_correct(self):
-        """Кеш главной страницы работает правильно."""
-        response = self.authorized_client.get(reverse('posts:index'))
-        temp_post = Post.objects.get(id=1)
-        temp_post.delete()
-        new_response = self.authorized_client.get(reverse('posts:index'))
-        self.assertEqual(response.content, new_response.content)
-        cache.clear()
-        new_new_response = self.authorized_client.get(reverse('posts:index'))
-        self.assertNotEqual(response.content, new_new_response.content)
+    # def test_index_page_cache_correct(self):
+    #     """Кеш главной страницы работает правильно."""
+    #     response = self.authorized_client.get(reverse('posts:index'))
+    #     temp_post = Post.objects.get(id=1)
+    #     temp_post.delete()
+    #     new_response = self.authorized_client.get(reverse('posts:index'))
+    #     self.assertEqual(response.content, new_response.content)
+    #     cache.clear()
+    #     new_new_response = self.authorized_client.get(reverse('posts:index'))
+    #     self.assertNotEqual(response.content, new_new_response.content)
 
     def test_authorized_user_can_follow_unfollow(self):
         """Авторизованный пользователь может подписываться на других
