@@ -36,6 +36,8 @@ ALLOWED_HOSTS = [
     'testserver',
     'www.Marat17.pythonanywhere.com',
     'Marat17.pythonanywhere.com',
+    'www.marat17.pythonanywhere.com',
+    'marat17.pythonanywhere.com',
 ]
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
