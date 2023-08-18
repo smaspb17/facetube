@@ -52,7 +52,7 @@ python manage.py createsuperuser
 ```
 python manage.py runserver
 ```
-12. Перейди по ссылке в браузере, для использования drf-spectacular:
+12. Перейди по ссылке в браузере на веб-сайт:
 ```
 http://127.0.0.1:8000/
 ```
