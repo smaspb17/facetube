@@ -4,7 +4,7 @@ Facetube - это учебный проект, в рамках изучения 
 
 Благодаря данному проекту блогеры смогут публиковать свои личные дневники, вести блоги и применять социальную коммуникацию. 
 ## СТЕК ТЕХНОЛОГИЙ:
-Python 3.11, Django Rest Framework 3.14, SQLite3, django-filter, drf-spectacular   
+Python 3.9.10, Django Rest Framework 3.14, SQLite3, django-filter, drf-spectacular   
 
 ## ЛОКАЛЬНАЯ УСТАНОВКА (для Windows):
 
@@ -32,17 +32,17 @@ pip install -r requirements.txt
 ``` 
 python.exe -m pip install --upgrade pip
 ```
-7. Обновите библиотеку Pillow:
-```
-python -m pip install --upgrade Pillow
-``` 
-8. Перейди в директорию surveys, там находится файл manage.py:
+7. Перейди в директорию surveys, там находится файл manage.py:
 ```
 cd yatube/
 ```
-9. Выполни миграции:
+8. Выполни миграции:
 ```cmd
 python manage.py migrate
+```
+9. Соберите статистические файлы:
+```cmd
+python manage.py collectstatic
 ```
 10. Создай суперпользователя:
 ```cmd
@@ -72,3 +72,4 @@ deactivate
 ## КОНТАКТЫ:
 
 smaspb17@yandex.ru
+
