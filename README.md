@@ -33,7 +33,7 @@ pip install -r requirements.txt
 python.exe -m pip install --upgrade pip
 ```
 7. Перейди в директорию surveys, там находится файл manage.py:
-```
+```cmd
 cd yatube/
 ```
 8. Выполни миграции:
@@ -55,7 +55,14 @@ python manage.py runserver
 12. Перейди по ссылке в браузере, для использования drf-spectacular:
 ```
 http://127.0.0.1:8000/
-``` 
+```
+13. Запусти тесты через pytest
+```cmd
+cd ..
+```
+```cmd
+pytest
+```
 Теперь ты можешь использовать проект на своём компьютере. Если ты хочешь остановить проект, нажми Ctrl+C в терминале, а затем деактивируй виртуальное окружение командой:
 ```cmd
 deactivate
