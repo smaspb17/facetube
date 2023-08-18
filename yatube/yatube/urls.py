@@ -19,7 +19,7 @@ handler403 = 'core.views.csrf_failure'  # обработчик ошибки 403
 # Разрешение брать картинки пользователя в режиме отладки
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += (path('__debug__/', include('debug_toolbar.urls')),)
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )

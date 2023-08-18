@@ -34,10 +34,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'testserver',
-    'www.Marat17.pythonanywhere.com',
-    'Marat17.pythonanywhere.com',
-    'www.marat17.pythonanywhere.com',
-    'marat17.pythonanywhere.com',
+    'www.marat23.pythonanywhere.com',
+    'marat23.pythonanywhere.com',
 ]
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
@@ -141,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = 'users:login'
 
