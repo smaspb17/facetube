@@ -4,7 +4,7 @@ Facetube - это учебный проект, в рамках изучения 
 
 Благодаря данному проекту блогеры смогут публиковать свои личные дневники, вести блоги и применять социальную коммуникацию. 
 ## СТЕК ТЕХНОЛОГИЙ:
-Python 3.9.10, Django Rest Framework 3.14, SQLite3, django-filter, drf-spectacular   
+Python 3.9.10, Django 2.2.16, SQLite3, templates, Pillow, sorl.thumbnail, pytest, django-debug-toolbar
 
 ## ЛОКАЛЬНАЯ УСТАНОВКА (для Windows):
 
