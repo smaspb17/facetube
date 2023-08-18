@@ -32,23 +32,27 @@ pip install -r requirements.txt
 ``` 
 python.exe -m pip install --upgrade pip
 ```
-7. Перейди в директорию surveys, там находится файл manage.py:
+7. Обновите библиотеку Pillow:
+```
+python -m pip install --upgrade Pillow
+``` 
+8. Перейди в директорию surveys, там находится файл manage.py:
 ```
 cd yatube/
 ```
-8. Выполни миграции:
+9. Выполни миграции:
 ```cmd
 python manage.py migrate
 ```
-9. Создай суперпользователя:
+10. Создай суперпользователя:
 ```cmd
 python manage.py createsuperuser
 ```
-10. Запусти проект на локальном сервере:
+11. Запусти проект на локальном сервере:
 ```
 python manage.py runserver
 ```
-11. Перейди по ссылке в браузере, для использования drf-spectacular:
+12. Перейди по ссылке в браузере, для использования drf-spectacular:
 ```
 http://127.0.0.1:8000/
 ``` 
