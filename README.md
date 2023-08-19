@@ -74,7 +74,7 @@ deactivate
 
 ## ЛИЦЕНЗИЯ:
 
-нет
+MIT License
 
 ## КОНТАКТЫ:
 
